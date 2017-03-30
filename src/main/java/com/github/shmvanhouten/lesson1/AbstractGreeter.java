@@ -1,4 +1,4 @@
-package com.github.shmvanhouten;
+package com.github.shmvanhouten.lesson1;
 
 public abstract class AbstractGreeter implements Greeter {
 

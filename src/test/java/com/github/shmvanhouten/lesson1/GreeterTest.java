@@ -1,5 +1,8 @@
-package com.github.shmvanhouten;
+package com.github.shmvanhouten.lesson1;
 
+import com.github.shmvanhouten.lesson1.DutchGreeter;
+import com.github.shmvanhouten.lesson1.EnglishGreeter;
+import com.github.shmvanhouten.lesson1.Greeter;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
