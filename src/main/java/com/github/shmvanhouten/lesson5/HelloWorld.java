@@ -3,36 +3,21 @@ package com.github.shmvanhouten.lesson5;
 import java.io.*;
 
 public class HelloWorld {
+
     public static void main(String[] args) {
 
 //        writeAFile();
         readAFile();
         readFromTerminalInput();
-        int number = new Integer(4);
-        pi(number);
 
-        int smallNumber = 6563;
-        long largeNumber = smallNumber;
-        short extraSmall = (short) smallNumber;
 
-        boolean wantFruit = true;
-
-        String s = wantFruit ? "Appel" : "MarsBar";
-
-        if (wantFruit) {
-            s = "Appel";
-        } else {
-            s = "MarsBar";
-        }
+        aLookAtTheExamTopics();
 
 
 
 
     }
 
-    public static void pi (Integer i) {
-        System.out.println(i);
-    }
 
     private static void readFromTerminalInput() {
         InputStream in = System.in;
@@ -78,5 +63,27 @@ public class HelloWorld {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    private static void aLookAtTheExamTopics() {
+        int number = new Integer(4);
+        printi(number);
+
+        int smallNumber = 6563;
+        long largeNumber = smallNumber;
+        short extraSmall = (short) smallNumber;
+
+        boolean wantFruit = true;
+
+        String s = wantFruit ? "Appel" : "MarsBar";
+
+        if (wantFruit) {
+            s = "Appel";
+        } else {
+            s = "MarsBar";
+        }
+    }
+
+    public static void printi(Integer i) {
+        System.out.println(i);
     }
 }
