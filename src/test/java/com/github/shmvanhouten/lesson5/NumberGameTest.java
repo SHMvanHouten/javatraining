@@ -38,4 +38,17 @@ public class NumberGameTest {
         assertThat(reason, game.checkIfNumberIsHigherOrLower("35"), is("Congratulations!"));
     }
 
+    @Test
+    public void itShouldNotAcceptFalseInput() throws Exception {
+        NumberGame game = new NumberGame(true);
+
+        String answer = "Please enter an integer number between 1 and 100.";
+
+        String reason1 = "non integer chars not allowed";
+        assertThat(reason1, game.checkIfNumberIsHigherOrLower("32s"), is(answer));
+        String reason2 = "numbers below 1 not allowed";
+        assertThat(reason2, game.checkIfNumberIsHigherOrLower("0"),is(answer));
+        String reason3 = "numbers over 100 not allowed";
+        assertThat(reason3, game.checkIfNumberIsHigherOrLower("101"), is(answer));
+    }
 }
