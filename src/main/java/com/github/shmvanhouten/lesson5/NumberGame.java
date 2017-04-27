@@ -50,8 +50,7 @@ public class NumberGame {
 
 
     public String checkIfNumberIsHigherOrLower(String inputString) {
-        boolean correctInput = isCorrectInput(inputString);
-        if(!correctInput){
+        if(!isCorrectInput(inputString)){
             return "Please enter an integer number between " + guessScope[0] + " and " + guessScope[1] + ".";
         }
 
