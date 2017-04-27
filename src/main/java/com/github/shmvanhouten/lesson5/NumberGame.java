@@ -18,6 +18,7 @@ public class NumberGame {
         if(b){
             numberToGuess = current().nextInt(guessScope[0], guessScope[1]);
         }
+        System.out.println("Guess a number between " + guessScope[0] + " and " + guessScope[1] + ".");
     }
 
     public static void main(String[] args) {
@@ -65,7 +66,7 @@ public class NumberGame {
             answer.append("Too Low!");
         }
         if (guess == numberToGuess){
-            answer.append("Congratulations!");
+            answer.append("Congratulations! You did it in " + guessCounter + " guesses!");
             gameOver = true;
         }else if (guessCounter >=10){
             answer.append("\nOut of Guesses! :(");
