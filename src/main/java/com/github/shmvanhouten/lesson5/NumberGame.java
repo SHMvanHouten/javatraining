@@ -9,13 +9,14 @@ public class NumberGame {
     private int numberToGuess;
     private int guessCounter = 0;
     private static boolean gameOver = false;
+    private int[] guessScope = {1,100};
 
     public NumberGame(int secretNumber){
         numberToGuess = secretNumber;
     }
     public NumberGame(boolean b){
         if(b){
-            numberToGuess = current().nextInt(1,100);
+            numberToGuess = current().nextInt(guessScope[0], guessScope[1]);
         }
     }
 
@@ -33,10 +34,7 @@ public class NumberGame {
         try(BufferedReader reader = new BufferedReader(inputStreamReader)) {
             String inputLine = reader.readLine();
             while (inputLine != null){
-                if(!isInteger(inputLine)){
-                    inputLine = "101";
-                }
-                String answer = game.checkIfNumberIsHigherOrLower(Integer.parseInt(inputLine));
+                String answer = game.checkIfNumberIsHigherOrLower(inputLine);
                 System.out.println(answer);
                 if(gameOver){
                     inputLine = null;
@@ -49,23 +47,16 @@ public class NumberGame {
         }
     }
 
-    private static boolean isInteger(String inputLine) {
-        for (char character : inputLine.toCharArray()) {
-            if(!Character.isDigit(character)){
-                return false;
-            }
+
+
+    public String checkIfNumberIsHigherOrLower(String inputString) {
+        boolean correctInput = isCorrectInput(inputString);
+        if(!correctInput){
+            return "Please enter an integer number between " + guessScope[0] + " and " + guessScope[1] + ".";
         }
-        return true;
-    }
-
-
-    public String checkIfNumberIsHigherOrLower(int guess) {
 
         StringBuilder answer = new StringBuilder("");
-
-        if(guess >100 || guess < 1){
-            return "Please enter an integer number between 1 and 100.";
-        }
+        int guess = Integer.parseInt(inputString);
         guessCounter++;
 
         if (guess > numberToGuess){
@@ -82,6 +73,22 @@ public class NumberGame {
             gameOver = true;
         }
         return answer.toString();
+    }
+
+    private boolean isCorrectInput(String inputString) {
+        if(!isInteger(inputString) || Integer.parseInt(inputString)<guessScope[0]|| Integer.parseInt(inputString)>guessScope[1]){
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean isInteger(String inputLine) {
+        for (char character : inputLine.toCharArray()) {
+            if(!Character.isDigit(character)){
+                return false;
+            }
+        }
+        return true;
     }
 
 }

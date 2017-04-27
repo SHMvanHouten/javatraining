@@ -11,9 +11,9 @@ public class NumberGameTest {
     public void itShouldSayIfANumberIsHigherOrLowerThanOurSecretNumber() throws Exception {
         int secretNumber = 35;
         NumberGame game = new NumberGame(secretNumber);
-        assertThat("15 is lower",game.checkIfNumberIsHigherOrLower(15),is("Too Low!"));
-        assertThat("35 is our number",game.checkIfNumberIsHigherOrLower(35),is("Congratulations!"));
-        assertThat("38 is higher",game.checkIfNumberIsHigherOrLower(38),is("Too High!"));
+        assertThat("15 is lower",game.checkIfNumberIsHigherOrLower("15"),is("Too Low!"));
+        assertThat("35 is our number",game.checkIfNumberIsHigherOrLower("35"),is("Congratulations!"));
+        assertThat("38 is higher",game.checkIfNumberIsHigherOrLower("38"),is("Too High!"));
     }
 
     @Test
@@ -21,10 +21,10 @@ public class NumberGameTest {
         int secretNumber = 35;
         NumberGame game = new NumberGame(secretNumber);
         for (int i = 0; i < 9; i++) {
-            game.checkIfNumberIsHigherOrLower(23);
+            game.checkIfNumberIsHigherOrLower("23");
         }
         String reason = "10th wrong guess is a loss";
-        assertThat(reason, game.checkIfNumberIsHigherOrLower(24), is("Too Low!\nOut of Guesses! :("));
+        assertThat(reason, game.checkIfNumberIsHigherOrLower("24"), is("Too Low!\nOut of Guesses! :("));
     }
 
     @Test
@@ -32,10 +32,10 @@ public class NumberGameTest {
         int secretNumber = 35;
         NumberGame game = new NumberGame(secretNumber);
         for(int i = 0; i<9; i++){
-            game.checkIfNumberIsHigherOrLower(23);
+            game.checkIfNumberIsHigherOrLower("23");
         }
         String reason = "10th wrong guess is a loss";
-        assertThat(reason, game.checkIfNumberIsHigherOrLower(35), is("Congratulations!"));
+        assertThat(reason, game.checkIfNumberIsHigherOrLower("35"), is("Congratulations!"));
     }
 
 }
