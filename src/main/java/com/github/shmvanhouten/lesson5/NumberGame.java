@@ -2,9 +2,8 @@ package com.github.shmvanhouten.lesson5;
 
 
 import java.io.*;
-import java.util.concurrent.ThreadLocalRandom;
-
 import static java.util.concurrent.ThreadLocalRandom.current;
+
 
 public class NumberGame {
     private int numberToGuess;
@@ -34,6 +33,9 @@ public class NumberGame {
         try(BufferedReader reader = new BufferedReader(inputStreamReader)) {
             String inputLine = reader.readLine();
             while (inputLine != null){
+                if(!isInteger(inputLine)){
+                    inputLine = "101";
+                }
                 String answer = game.checkIfNumberIsHigherOrLower(Integer.parseInt(inputLine));
                 System.out.println(answer);
                 if(gameOver){
@@ -47,10 +49,23 @@ public class NumberGame {
         }
     }
 
+    private static boolean isInteger(String inputLine) {
+        for (char character : inputLine.toCharArray()) {
+            if(!Character.isDigit(character)){
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     public String checkIfNumberIsHigherOrLower(int guess) {
 
         StringBuilder answer = new StringBuilder("");
+
+        if(guess >100 || guess < 1){
+            return "Please enter an integer number between 1 and 100.";
+        }
         guessCounter++;
 
         if (guess > numberToGuess){
