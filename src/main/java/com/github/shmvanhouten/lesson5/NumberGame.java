@@ -6,39 +6,43 @@ import static java.util.concurrent.ThreadLocalRandom.current;
 
 
 public class NumberGame {
-    private int numberToGuess;
+    private int targetNumber;
     private int guessCounter = 0;
     private static boolean gameOver = false;
     private int[] guessScope = {1,100};
 
     public NumberGame(int secretNumber){
-        numberToGuess = secretNumber;
+        targetNumber = secretNumber;
     }
     public NumberGame(boolean b){
-        if(b){
-            numberToGuess = current().nextInt(guessScope[0], guessScope[1]);
-        }
+        setTargetNumber(b);
         System.out.println("Guess a number between " + guessScope[0] + " and " + guessScope[1] + ".");
     }
 
     public static void main(String[] args) {
-//        NumberGame game = new NumberGame(35);
-        NumberGame game = new NumberGame(true);
-
-        startInputStream(game);
+        NumberGame game = new NumberGame(35);
+//        NumberGame game = new NumberGame(true);
+        game.startInputStream();
     }
 
-    private static void startInputStream(NumberGame game) {
+    private void startInputStream() {
         InputStream in = System.in;
         InputStreamReader inputStreamReader = new InputStreamReader(in);
 
         try(BufferedReader reader = new BufferedReader(inputStreamReader)) {
             String inputLine = reader.readLine();
             while (inputLine != null){
-                String answer = game.checkIfNumberIsHigherOrLower(inputLine);
+                String answer = this.checkIfNumberIsHigherOrLower(inputLine);
                 System.out.println(answer);
                 if(gameOver){
-                    inputLine = null;
+                    if(wantsNewGame(reader)){
+                        resetAllValues();
+                        System.out.println("Guess Again!");
+                        inputLine = reader.readLine();
+                    }else {
+                        System.out.println("Bye!");
+                        inputLine = null;
+                    }
                 }else {
                     inputLine = reader.readLine();
                 }
@@ -46,8 +50,24 @@ public class NumberGame {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
+    private void resetAllValues() {
+        setTargetNumber(true);
+        guessCounter = 0;
+        gameOver = false;
+    }
+
+
+    private static boolean wantsNewGame(BufferedReader reader) throws IOException{
+        System.out.println("New Game? Y/N");
+        int inputChar = reader.read();
+            if(inputChar == 'y' || inputChar == 'Y'){
+                return true;
+            }
+        return false;
+    }
 
 
     public String checkIfNumberIsHigherOrLower(String inputString) {
@@ -59,13 +79,13 @@ public class NumberGame {
         int guess = Integer.parseInt(inputString);
         guessCounter++;
 
-        if (guess > numberToGuess){
+        if (guess > targetNumber){
             answer.append("Too High!");
         }
-        if (guess < numberToGuess){
+        if (guess < targetNumber){
             answer.append("Too Low!");
         }
-        if (guess == numberToGuess){
+        if (guess == targetNumber){
             answer.append("Congratulations! You did it in " + guessCounter + " guesses!");
             gameOver = true;
         }else if (guessCounter >=10){
@@ -89,6 +109,12 @@ public class NumberGame {
             }
         }
         return true;
+    }
+
+    private void setTargetNumber(boolean b) {
+        if(b){
+            targetNumber = current().nextInt(guessScope[0], guessScope[1]);
+        }
     }
 
 }
