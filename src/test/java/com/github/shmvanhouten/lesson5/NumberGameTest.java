@@ -12,7 +12,8 @@ public class NumberGameTest {
         int secretNumber = 35;
         NumberGame game = new NumberGame(secretNumber);
         assertThat("15 is lower",game.checkIfNumberIsHigherOrLower("15"),is("Too Low!"));
-        assertThat("35 is our number",game.checkIfNumberIsHigherOrLower("35"),is("Congratulations!"));
+        String congratsMessage = "Congratulations! You did it in 2 guesses!";
+        assertThat("35 is our number",game.checkIfNumberIsHigherOrLower("35"),is(congratsMessage));
         assertThat("38 is higher",game.checkIfNumberIsHigherOrLower("38"),is("Too High!"));
     }
 
@@ -35,12 +36,13 @@ public class NumberGameTest {
             game.checkIfNumberIsHigherOrLower("23");
         }
         String reason = "10th wrong guess is a loss";
-        assertThat(reason, game.checkIfNumberIsHigherOrLower("35"), is("Congratulations!"));
+        String congratsMessage = "Congratulations! You did it in 10 guesses!";
+        assertThat(reason, game.checkIfNumberIsHigherOrLower("35"), is(congratsMessage));
     }
 
     @Test
     public void itShouldNotAcceptFalseInput() throws Exception {
-        NumberGame game = new NumberGame(true);
+        NumberGame game = new NumberGame();
 
         String answer = "Please enter an integer number between 1 and 100.";
 
