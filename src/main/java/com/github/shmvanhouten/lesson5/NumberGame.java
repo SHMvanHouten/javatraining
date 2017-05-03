@@ -73,11 +73,6 @@ public class NumberGame {
 
 
     public String checkIfNumberIsHigherOrLower(String inputString) {
-//        if(!isCorrectInput(inputString)){
-//            return "Please enter an integer number between " + guessScope[0] + " and " + guessScope[1] + ".";
-//        }
-
-        StringBuilder answer = new StringBuilder("");
         int guess;
         try{
             guess = Integer.parseInt(inputString);
@@ -87,6 +82,8 @@ public class NumberGame {
         }catch(NumberFormatException | IntegerOutOfRangeException exception){
             return "Please enter an integer number between " + guessScope[0] + " and " + guessScope[1] + ".";
         }
+
+        StringBuilder answer = new StringBuilder("");
         guessCounter++;
 
         if (guess > targetNumber){
