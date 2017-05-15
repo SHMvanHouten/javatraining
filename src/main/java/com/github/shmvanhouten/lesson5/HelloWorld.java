@@ -6,7 +6,7 @@ public class HelloWorld {
 
     public static void main(String[] args) {
 
-//        writeAFile();
+        writeAFile();
         readAFile();
         readFromTerminalInput();
 
@@ -18,16 +18,12 @@ public class HelloWorld {
 
     }
 
-
-    private static void readFromTerminalInput() {
-        InputStream in = System.in;
-        InputStreamReader isr = new InputStreamReader(in);
-        try(BufferedReader reader = new BufferedReader(isr)){
-            String readLine = reader.readLine();
-            while(readLine != null){
-                System.out.println(readLine);
-                readLine = reader.readLine();
-            }
+    private static void writeAFile() {
+        File file = new File("/home/sjoerd/Documents","sjoerd.txt");
+        try (FileOutputStream fos = new FileOutputStream(file); PrintWriter pw = new PrintWriter(fos)){
+            file.createNewFile();
+            fos.write("Hello World!\n".getBytes());
+            pw.println("why doesn't world say anything back?" + System.currentTimeMillis());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,16 +50,22 @@ public class HelloWorld {
         return null;
     }
 
-    private static void writeAFile() {
-        File file = new File("/home/sjoerd/Documents","sjoerd.txt");
-        try (FileOutputStream fos = new FileOutputStream(file); PrintWriter pw = new PrintWriter(fos)){
-            file.createNewFile();
-            fos.write("Hello World!\n".getBytes());
-            pw.println("why doesn't world say anything back?" + System.currentTimeMillis());
+    private static void readFromTerminalInput() {
+        InputStream in = System.in;
+        InputStreamReader isr = new InputStreamReader(in);
+        try(BufferedReader reader = new BufferedReader(isr)){
+            String readLine = reader.readLine();
+            while(readLine != null){
+                System.out.println(readLine);
+                readLine = reader.readLine();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
+
     private static void aLookAtTheExamTopics() {
         int number = new Integer(4);
         printi(number);
