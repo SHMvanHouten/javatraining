@@ -9,7 +9,7 @@ public class NumberGame {
     private int targetNumber;
     private int guessCounter = 0;
     private static boolean gameOver = false;
-    private int[] guessScope = {1,100};
+    private final int[] guessScope = {1,100};
 
     public NumberGame(int secretNumber){
         targetNumber = secretNumber;
@@ -93,7 +93,7 @@ public class NumberGame {
             answer.append("Too Low!");
         }
         if (guess == targetNumber){
-            answer.append("Congratulations! You did it in " + guessCounter + " guesses!");
+            answer.append("Congratulations! You did it in ").append(guessCounter).append(" guesses!");
             gameOver = true;
         }else if (guessCounter >=10){
             answer.append("\nOut of Guesses! :(");
