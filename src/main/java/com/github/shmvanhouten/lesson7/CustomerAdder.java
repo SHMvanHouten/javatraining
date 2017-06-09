@@ -55,4 +55,9 @@ public class CustomerAdder {
 
         insert.execute(values);
     }
+
+    public void deleteCustomer(Integer customerId) {
+        String sql = "DELETE FROM Customer Where CustomerId = ?";
+        jdbcTemplate.update(sql, customerId);
+    }
 }

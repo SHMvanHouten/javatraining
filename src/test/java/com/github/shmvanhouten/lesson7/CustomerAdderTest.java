@@ -30,6 +30,8 @@ public class CustomerAdderTest {
         adder.addCustomer("John", "Doe", "John_Doe9292@hotmail.com");
         List<Customer> customers = adder.getCustomerList();
         assertThat(customers.get(customers.size() -  1).getLastName(), is("Doe"));
+        //delete him again after the test
+        adder.deleteCustomer(60);
     }
 
     private void printCustomerList(List<Customer> customers) {
