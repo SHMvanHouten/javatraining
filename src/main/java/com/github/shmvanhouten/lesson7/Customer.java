@@ -6,12 +6,25 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String email;
+    private String address;
+    private String city;
+    private String country;
 
     public Customer(Integer customerId, String firstName, String lastName, String email) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+
+    public Customer(Integer customerId, String firstName, String lastName, String email, String address, String city, String country){
+        this.customerId = customerId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.address = address;
+        this.city = city;
+        this.country = country;
     }
 
     public Integer getCustomerId() {

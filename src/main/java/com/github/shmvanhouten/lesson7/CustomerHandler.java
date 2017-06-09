@@ -12,13 +12,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CustomerAdder {
+public class CustomerHandler {
 
     private SimpleJdbcInsert insert;
     private JdbcTemplate jdbcTemplate;
     private DataSource dataSource;
 
-    public CustomerAdder(){
+    public CustomerHandler(){
         try {
             Driver driver = new com.mysql.cj.jdbc.Driver();
 
@@ -30,7 +30,7 @@ public class CustomerAdder {
 
             insert = new SimpleJdbcInsert(dataSource)
                     .withTableName("Customer")
-                    .usingColumns("CustomerId", "FirstName", "LastName", "Email");
+                    .usingColumns("CustomerId", "FirstName", "LastName", "Email", "Address", "City", "Country");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -47,17 +47,39 @@ public class CustomerAdder {
     }
 
     public void addCustomer(String firstName, String lastName, String email) {
+        Map<String, Object> values = getBasicCustomerValueMap(firstName, lastName, email);
+
+        values.put("Address", null);
+        values.put("City", null);
+        values.put("Country", null);
+
+
+        insert.execute(values);
+    }
+
+    public void addCustomer(String firstName, String lastName, String email, String address, String city, String country) {
+        Map<String, Object> values = getBasicCustomerValueMap(firstName, lastName, email);
+
+        values.put("Address", address);
+        values.put("City", city);
+        values.put("Country", country);
+
+        insert.execute(values);
+    }
+
+    private Map<String, Object> getBasicCustomerValueMap(String firstName, String lastName, String email) {
         Map<String, Object> values = new HashMap<>();
         values.put("CustomerId", getNewCustomerId());
         values.put("FirstName", firstName);
         values.put("LastName", lastName);
         values.put("Email", email);
-
-        insert.execute(values);
+        return values;
     }
 
     public void deleteCustomer(Integer customerId) {
         String sql = "DELETE FROM Customer Where CustomerId = ?";
         jdbcTemplate.update(sql, customerId);
     }
+
+
 }
