@@ -29,9 +29,7 @@ public class DatabaseDemo {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-
                 while (resultSet.next()) {
-
                     Integer id = resultSet.getInt("ArtistId");
                     String name = resultSet.getString("name");// de String Name is dus niet hoofdletter gevoelig.
                     Artist artist = new Artist(id, name);
