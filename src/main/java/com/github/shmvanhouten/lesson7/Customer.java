@@ -42,4 +42,16 @@ public class Customer {
     public String getEmail() {
         return email;
     }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
 }

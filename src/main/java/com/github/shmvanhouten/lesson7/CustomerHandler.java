@@ -77,9 +77,13 @@ public class CustomerHandler {
     }
 
     public void deleteCustomer(Integer customerId) {
-        String sql = "DELETE FROM Customer Where CustomerId = ?";
+        String sql = "DELETE FROM Customer WHERE CustomerId = ?";
         jdbcTemplate.update(sql, customerId);
     }
 
 
+    public void changeCustomerAddress(Integer customerId, String address, String city, String country) {
+        String sql = "UPDATE Customer SET Address = ? , City = ? , Country = ? WHERE customerId = ?";
+        jdbcTemplate.update(sql, address, city, country, customerId);
+    }
 }
