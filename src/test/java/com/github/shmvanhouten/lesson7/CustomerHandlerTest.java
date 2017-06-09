@@ -1,12 +1,9 @@
 package com.github.shmvanhouten.lesson7;
 
-import org.junit.Ignore;
 import org.junit.Test;
-
-import java.util.ArrayList;
 import java.util.List;
-import static org.hamcrest.CoreMatchers.is;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 public class CustomerAdderTest {
@@ -31,7 +28,7 @@ public class CustomerAdderTest {
         List<Customer> customers = adder.getCustomerList();
         assertThat(customers.get(customers.size() -  1).getLastName(), is("Doe"));
         //delete him again after the test
-        adder.deleteCustomer(60);
+        adder.deleteCustomer(customers.size() -1);
     }
 
     private void printCustomerList(List<Customer> customers) {
