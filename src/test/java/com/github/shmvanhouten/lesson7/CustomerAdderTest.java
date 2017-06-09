@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import static org.hamcrest.CoreMatchers.is;
 
 import static org.junit.Assert.*;
 
@@ -19,6 +20,12 @@ public class CustomerAdderTest {
         CustomerAdder adder = new CustomerAdder();
         List<Customer> customers = adder.getCustomerList();
         printCustomerList(customers);
+    }
+
+    @Test
+    public void itShouldSayWhichCustomerIdIsTheHighest() throws Exception {
+        CustomerAdder adder = new CustomerAdder();
+        assertThat(adder.getNewCustomerId(), is(60));
     }
 
     private void printCustomerList(List<Customer> customers) {

@@ -32,4 +32,9 @@ public class CustomerAdder {
         String sql = "SELECT * FROM Customer";
         return jdbcTemplate.query(sql, new CustomerRowMapper());
     }
+
+    public Integer getNewCustomerId() {
+        String sql = "SELECT MAX(CustomerId) FROM Customer";
+        return jdbcTemplate.queryForObject(sql, Integer.class) + 1;
+    }
 }
