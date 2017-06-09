@@ -1,7 +1,18 @@
 package com.github.shmvanhouten.lesson7;
 
-/**
- * Created by Eigenaar on 8-6-2017.
- */
-public class ArtistRowMapper {
+import org.springframework.jdbc.core.RowMapper;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class ArtistRowMapper implements RowMapper<Artist> {
+
+
+    @Override
+    public Artist mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+        Integer id = resultSet.getInt("ArtistId");
+        String name = resultSet.getString("name");
+
+        return new Artist(id, name);
+    }
 }

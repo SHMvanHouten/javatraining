@@ -1,7 +1,20 @@
 package com.github.shmvanhouten.lesson7;
 
-/**
- * Created by Eigenaar on 8-6-2017.
- */
-public class Album {
+
+public class Artist {
+    private final Integer artistId;
+    private final String name;
+
+    public Artist(Integer artistId, String name){
+        this.artistId = artistId;
+        this.name = name;
+    }
+
+    public Integer getArtistId() {
+        return artistId;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
