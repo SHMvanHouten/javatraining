@@ -113,6 +113,9 @@ public class CustomerServicePoint {
         }
         if (userInput == 1) {
             printQuestion("first name");
+        }else if(userInput ==2){
+            //imagine this is really a login with a password.
+            printQuestion("email");
         }
     }
 }

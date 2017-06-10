@@ -12,25 +12,25 @@ public class CustomerHandlerTest {
 
     @Test
     public void itShouldGiveAListOfCustomers() throws Exception {
-        CustomerHandler adder = new CustomerHandler();
-        List<Customer> customers = adder.getCustomerList();
+        CustomerHandler handler = new CustomerHandler();
+        List<Customer> customers = handler.getCustomerList();
         printCustomerList(customers);
     }
 
     @Test
     public void itShouldSayWhichCustomerIdIsTheHighest() throws Exception {
-        CustomerHandler adder = new CustomerHandler();
-        assertThat(adder.getNewCustomerId(), is(60));
+        CustomerHandler handler = new CustomerHandler();
+        assertThat(handler.getNewCustomerId(), is(60));
     }
 
     @Test@Ignore
     public void itShouldAddANewCustomer() throws Exception {
-        CustomerHandler adder = new CustomerHandler();
-        adder.addCustomer("John", "Doe", "John_Doe9292@hotmail.com");
-        List<Customer> customers = adder.getCustomerList();
+        CustomerHandler handler = new CustomerHandler();
+        handler.addCustomer("John", "Doe", "John_Doe9292@hotmail.com");
+        List<Customer> customers = handler.getCustomerList();
         assertThat(customers.get(customers.size() -  1).getLastName(), is("Doe"));
         //delete him again after the test
-        adder.deleteCustomer(customers.size());
+        handler.deleteCustomer(customers.size());
     }
 
     @Test@Ignore
@@ -48,6 +48,21 @@ public class CustomerHandlerTest {
         assertThat(customers.get(customers.size() -  1).getAddress(), is("Dorpsstraat 2223-3"));
         assertThat(customers.get(customers.size() -  1).getCity(), is("Ons Dorp"));
         handler.deleteCustomer(60);
+    }
+
+    @Test
+    public void itShouldFindACustomerId() throws Exception {
+        CustomerHandler handler = new CustomerHandler();
+        assertThat(handler.findCustomerId("luisg@embraer.com.br"), is(1));
+    }
+
+    @Test
+    public void itShouldFindACustomer() throws Exception {
+        CustomerHandler handler = new CustomerHandler();
+        Customer luis = handler.findCustomer("luisg@embraer.com.br");
+        Customer leonie = handler.findCustomer("leonekohler@surfeu.de");
+        assertThat(luis.getCustomerId(), is(1));
+        assertThat(leonie.getCustomerId(), is(2));
     }
 
     private void printCustomerList(List<Customer> customers) {

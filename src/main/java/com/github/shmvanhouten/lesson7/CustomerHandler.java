@@ -86,4 +86,31 @@ public class CustomerHandler {
         String sql = "UPDATE Customer SET Address = ? , City = ? , Country = ? WHERE customerId = ?";
         jdbcTemplate.update(sql, address, city, country, customerId);
     }
+
+    public Integer findCustomerId(String email) {
+        //unsafe way:
+//        String sql = "SELECT CustomerId FROM Customer WHERE Email = '" + email + "'";
+//        return jdbcTemplate.queryForObject(sql, Integer.class);
+        //safe way:
+        String sql = "SELECT * FROM Customer WHERE Email = ?";
+        String[] args = {email};
+//        return jdbcTemplate.queryForObject(sql, args, Integer.class); doesn't work..
+        List<Customer> customers = jdbcTemplate.query(sql, args, new CustomerRowMapper());
+        if(customers.size() >1){
+            return 0;
+        }else{
+            return customers.get(0).getCustomerId();
+        }
+    }
+
+    public Customer findCustomer(String email) {
+        String sql = "SELECT * From Customer WHERE Email = ?";
+        String[] args = {email};
+        List<Customer> customers = jdbcTemplate.query(sql, args, new CustomerRowMapper());
+        if(customers.size() >1){
+            return null;
+        }else{
+            return customers.get(0);
+        }
+    }
 }
