@@ -88,10 +88,6 @@ public class CustomerHandler {
     }
 
     public Integer findCustomerId(String email) {
-        //unsafe way:
-//        String sql = "SELECT CustomerId FROM Customer WHERE Email = '" + email + "'";
-//        return jdbcTemplate.queryForObject(sql, Integer.class);
-        //safe way:
         String sql = "SELECT * FROM Customer WHERE Email = ?";
         String[] args = {email};
 //        return jdbcTemplate.queryForObject(sql, args, Integer.class); doesn't work..
@@ -107,7 +103,17 @@ public class CustomerHandler {
         String sql = "SELECT * From Customer WHERE Email = ?";
         String[] args = {email};
         List<Customer> customers = jdbcTemplate.query(sql, args, new CustomerRowMapper());
-        if(customers.size() >1){
+        if(customers.size() != 1){
+            return null;
+        }else{
+            return customers.get(0);
+        }
+    }
+
+    public Customer unsafeFindCustomer(String email){
+        String sql = "SELECT * FROM Customer WHERE Email = '" + email + "'";
+        List<Customer> customers = jdbcTemplate.query(sql, new CustomerRowMapper());
+        if(customers.size() != 1){
             return null;
         }else{
             return customers.get(0);
