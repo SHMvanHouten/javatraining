@@ -33,7 +33,7 @@ public class CustomerHandlerTest {
         adder.deleteCustomer(customers.size());
     }
 
-    @Test
+    @Test@Ignore
     public void itShouldChangeTheCustomersAddress() throws Exception {
         CustomerHandler handler = new CustomerHandler();
         handler.addCustomer("John", "Doe", "John_Doe9292@hotmail.com", "KalverStraat 3032B", "Amsterdam", "Netherlands");
@@ -46,6 +46,7 @@ public class CustomerHandlerTest {
         handler.changeCustomerAddress(60, "Dorpsstraat 2223-3", "Ons Dorp", "Netherlands");
         customers = handler.getCustomerList();
         assertThat(customers.get(customers.size() -  1).getAddress(), is("Dorpsstraat 2223-3"));
+        assertThat(customers.get(customers.size() -  1).getCity(), is("Ons Dorp"));
         handler.deleteCustomer(60);
     }
 

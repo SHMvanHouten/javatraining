@@ -10,13 +10,6 @@ public class Customer {
     private String city;
     private String country;
 
-    public Customer(Integer customerId, String firstName, String lastName, String email) {
-        this.customerId = customerId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-    }
-
     public Customer(Integer customerId, String firstName, String lastName, String email, String address, String city, String country){
         this.customerId = customerId;
         this.firstName = firstName;
