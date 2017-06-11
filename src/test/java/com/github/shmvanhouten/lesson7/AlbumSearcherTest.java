@@ -1,10 +1,8 @@
 package com.github.shmvanhouten.lesson7;
 
-// This class is made as an example to show the danger of not using prepared statements,
-// It is dangerously bad code, don't use it.
-
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -20,6 +18,16 @@ public class AlbumSearcherTest {
 
     @Test
     public void itShouldAllowASqlInjection() throws Exception {
+        UnsafeAlbumSearcher searcher = new UnsafeAlbumSearcher();
+        List<String> albums = searcher.unsafeGetAlbumsFromArtist("Metallica");
+        assertThat(albums.get(0), is("Garage Inc. (Disc 1)"));
+        albums = searcher.unsafeGetAlbumsFromArtist("Metallica' UNION(SELECT lastName FROM Customer);-- -");
+        printList(albums);
+    }
 
+    private void printList(List<String> albums) {
+        for (String album : albums) {
+            System.out.println(album);
+        }
     }
 }

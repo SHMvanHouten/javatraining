@@ -9,8 +9,7 @@ import java.sql.Driver;
 import java.sql.SQLException;
 import java.util.List;
 
-// This class is made as an example to show the danger of not using prepared statements,
-// It is dangerously bad code, don't use it.
+
 public class AlbumSearcher {
 
     private JdbcTemplate jdbcTemplate;
@@ -31,8 +30,7 @@ public class AlbumSearcher {
         }
     }
     public List<Album> getAlbumsFromArtist(String artist) {
-        String sql = "SELECT Album.title FROM Album JOIN Artist ON Album.ArtistId = Artist.ArtistId WHERE Artist.Name = '" +
-                artist + "'";
-        return jdbcTemplate.query(sql, new AlbumRowMapper());
+        String sql = "SELECT Album.title FROM Album JOIN Artist ON Album.ArtistId = Artist.ArtistId WHERE Artist.Name = ?";
+        return jdbcTemplate.query(sql, new AlbumRowMapper(), artist);
     }
 }
