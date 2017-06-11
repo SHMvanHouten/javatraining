@@ -110,13 +110,8 @@ public class CustomerHandler {
         }
     }
 
-    public Customer unsafeFindCustomer(String email){
-        String sql = "SELECT * FROM Customer WHERE Email = '" + email + "'";
-        List<Customer> customers = jdbcTemplate.query(sql, new CustomerRowMapper());
-        if(customers.size() != 1){
-            return null;
-        }else{
-            return customers.get(0);
-        }
+    public void unsafeDeleteCustomer(String email){
+        String sql = "DELETE FROM Customer WHERE Email = '" + email + "'";
+        jdbcTemplate.execute(sql);
     }
 }

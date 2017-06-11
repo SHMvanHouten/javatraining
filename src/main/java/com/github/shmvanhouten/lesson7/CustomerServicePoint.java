@@ -32,7 +32,7 @@ public class CustomerServicePoint {
         System.out.println("Would you like to:");
         System.out.println("Register as a new customer? (enter 1)");
         System.out.println("Report an address change? (enter 2)");
-        System.out.println("hack into our system? (enter 3)");
+        System.out.println("Remove your account? (unsafe) (enter 3)");
     }
 
     private void startInputStream(CustomerHandler handler) {
@@ -62,9 +62,7 @@ public class CustomerServicePoint {
     }
 
     private void unsafeLogin(CustomerHandler handler, String userInput) {
-        Customer customer = handler.unsafeFindCustomer(userInput);
-        String name = customer.getFirstName() + " " + customer.getLastName();
-        System.out.println("Welcome, " + name);
+        handler.unsafeDeleteCustomer(userInput);
     }
 
     private void changeCustomerAddress(CustomerHandler handler, String userInput) {

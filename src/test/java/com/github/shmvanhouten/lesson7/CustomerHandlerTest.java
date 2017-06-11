@@ -65,6 +65,17 @@ public class CustomerHandlerTest {
         assertThat(leonie.getCustomerId(), is(2));
     }
 
+    @Test (expected = NullPointerException.class)
+    public void itShouldShowTheDangerOfNotUsingPreparedStatements() throws Exception {
+        CustomerHandler handler = new CustomerHandler();
+        handler.addCustomer("John", "Doe", "John_Doe9292@hotmail.com", "KalverStraat 3032B", "Amsterdam", "Netherlands");
+        handler.addCustomer("Frits", "Spits", "FritsSpits@hotmail.com", "Blastraat", "Lutjebroek", "Netherlands");
+        handler.unsafeDeleteCustomer("John_Doe9292@hotmail.com' OR firstName = 'Frits");
+        //Or imagine this: "John_Doe9292@hotmail.com' OR CustomerId > 0; -- "...
+        Customer frits = handler.findCustomer("FritsSpits@hotmail.com");
+        System.out.println(frits.getEmail());
+    }
+
     private void printCustomerList(List<Customer> customers) {
         for (Customer customer : customers) {
             System.out.println(customer.getCustomerId() + "-->" + customer.getFirstName() + " " + customer.getLastName()

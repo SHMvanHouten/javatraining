@@ -65,7 +65,7 @@ public class SpringDatabaseDemo {
     public static void main(String[] args) {
         SpringDatabaseDemo demo = new SpringDatabaseDemo();
 
-//        demo.addNewArtist("Marco Beelen");
+        demo.addNewArtist("Marco Beelen");
         demo.deleteArtist(278);
         List<Artist> artists = demo.queryArtists();
         for (Artist artist : artists) {
