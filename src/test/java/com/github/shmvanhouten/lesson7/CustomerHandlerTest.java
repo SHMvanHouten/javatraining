@@ -70,8 +70,8 @@ public class CustomerHandlerTest {
         CustomerHandler handler = new CustomerHandler();
         handler.addCustomer("John", "Doe", "John_Doe9292@hotmail.com", "KalverStraat 3032B", "Amsterdam", "Netherlands");
         handler.addCustomer("Frits", "Spits", "FritsSpits@hotmail.com", "Blastraat", "Lutjebroek", "Netherlands");
-        handler.unsafeDeleteCustomer("John_Doe9292@hotmail.com' OR firstName = 'Frits");
-        //Or imagine this: "John_Doe9292@hotmail.com' OR CustomerId > 0; -- "...
+        handler.unsafeDeleteCustomer("doesnotmatter' OR firstName = 'Frits");
+        //Or imagine this: "John_Doe9292@hotmail.com' OR CustomerId > 0; -- "... or simply "doesntmatter@hotmail.com' OR 1 = 1; -- "
         Customer frits = handler.findCustomer("FritsSpits@hotmail.com");
         System.out.println(frits.getEmail());
     }

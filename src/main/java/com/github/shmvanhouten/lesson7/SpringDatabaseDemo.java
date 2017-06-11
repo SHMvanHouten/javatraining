@@ -57,7 +57,7 @@ public class SpringDatabaseDemo {
     }
 
     private void deleteArtist(int artistId) {
-        String sql = "DELETE FROM Artist WHERE ArtistId = ?";// om sql injection te voorkomen: prepared statement
+        String sql = "DELETE FROM Artist WHERE ArtistId = ?";// to prevent sql injection: prepared statement
         int numberOfDeletedRows = jdbcTemplate.update(sql, artistId);
         System.out.println("Number of deleted rows = " + numberOfDeletedRows);
     }
