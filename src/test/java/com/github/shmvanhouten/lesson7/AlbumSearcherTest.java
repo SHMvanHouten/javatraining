@@ -19,10 +19,16 @@ public class AlbumSearcherTest {
     @Test
     public void itShouldAllowASqlInjection() throws Exception {
         UnsafeAlbumSearcher searcher = new UnsafeAlbumSearcher();
+        List<String> albums = searcher.unsafeGetAlbumsFromArtist("' UNION(SELECT email FROM Customer);-- -");
+        assertThat(albums.get(0), is("luisg@embraer.com.br"));
+        printList(albums);
+    }
+
+    @Test
+    public void itShouldSearchForAllTheAlbumsFromASingleArtistUnsafeToo() throws Exception {
+        UnsafeAlbumSearcher searcher = new UnsafeAlbumSearcher();
         List<String> albums = searcher.unsafeGetAlbumsFromArtist("Metallica");
         assertThat(albums.get(0), is("Garage Inc. (Disc 1)"));
-        albums = searcher.unsafeGetAlbumsFromArtist("Metallica' UNION(SELECT lastName FROM Customer);-- -");
-        printList(albums);
     }
 
     private void printList(List<String> albums) {

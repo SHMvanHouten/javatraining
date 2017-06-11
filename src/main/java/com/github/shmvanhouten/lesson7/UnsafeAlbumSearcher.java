@@ -27,7 +27,7 @@ public class UnsafeAlbumSearcher {
         }
     }
 
-    public List<String> unsafeGetAlbumsFromArtist(String album) {
+    public List<String> unsafeGetAlbumsFromArtist(String artist) {
         List<String> albums = new ArrayList<>();
 
         try {
@@ -37,9 +37,13 @@ public class UnsafeAlbumSearcher {
             String user = "root";
             Connection connection = DriverManager.getConnection(url, user, Password.getPassword());
 
-            String sql = "SELECT Album.title FROM Album JOIN Artist ON Album.ArtistId = Artist.ArtistId WHERE Artist.Name = '"+
-                    album + "'";
+//            String sql = "SELECT Album.title FROM Album JOIN Artist ON Album.ArtistId = Artist.ArtistId WHERE Artist.Name = '" +
+//                    artist + "'";
+//            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            String sql = "SELECT Album.title FROM Album JOIN Artist ON Album.ArtistId = Artist.ArtistId WHERE Artist.Name = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, artist);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
