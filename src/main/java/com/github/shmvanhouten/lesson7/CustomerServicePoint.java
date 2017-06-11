@@ -63,15 +63,16 @@ public class CustomerServicePoint {
 
     private void unsafeLogin(CustomerHandler handler, String userInput) {
         handler.unsafeDeleteCustomer(userInput);
+        userServiceChoice = -1;
     }
 
     private void changeCustomerAddress(CustomerHandler handler, String userInput) {
         switch (serviceStep) {
             case 0:
                 Customer customer = handler.findCustomer(userInput);
-                if(customer == null){
+                if (customer == null) {
                     System.out.println("Email not found");
-                }else{
+                } else {
                     String name = customer.getFirstName() + " " + customer.getLastName();
                     customerId = customer.getCustomerId();
                     System.out.println("Welcome, " + name);
@@ -140,21 +141,23 @@ public class CustomerServicePoint {
     }
 
     private void checkInitialUserInput(String readLine) {
-        int userInput = 0;
-        try {
-            userInput = Integer.parseInt(readLine);
-            if (userInput < 1 || userInput > 3) {
-                throw new IntegerOutOfRangeException();
-            }
-            userServiceChoice = userInput;
-        } catch (NumberFormatException | IntegerOutOfRangeException ex) {
-            System.out.println("Please enter a 1 ,2 or 3");
-        }
-        if (userInput == 1) {
-            printQuestion("first name");
-        }else if(userInput == 2 || userInput == 3){
-            //imagine this is really a login with a password.
-            printQuestion("email");
+        switch (readLine) {
+            case "1":
+                userServiceChoice = 1;
+                printQuestion("first name");
+                break;
+            case "2":
+                //imagine this is really a login with a password.
+                userServiceChoice = 2;
+                printQuestion("email");
+                break;
+            case "3":
+                userServiceChoice = 3;
+                printQuestion("email");
+                break;
+            default:
+                System.out.println("Please enter a 1 ,2 or 3");
+                break;
         }
     }
 }
